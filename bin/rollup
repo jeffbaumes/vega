@@ -2,6 +2,7 @@
 
 var rollup = require('rollup'),
     nodeResolve = require('rollup-plugin-node-resolve'),
+    commonjs = require('rollup-plugin-commonjs'),
     externals = process.argv[2] === '-e',
     output = externals ? 'vega.ext.js' : 'vega.js';
 
@@ -21,7 +22,11 @@ var modules = !externals ? [] : [
   'd3-scale-chromatic',
   'd3-shape',
   'd3-time-format',
-  'd3-voronoi'
+  'd3-voronoi',
+  'parse-svg-path',
+  'simplify-path',
+  'svg-path-contours',
+  'triangulate-contours'
 ];
 
 var module_globals = modules.reduce(
@@ -34,6 +39,7 @@ rollup.rollup({
   external: modules,
   plugins: [
     resolveCache(nodeResolve({jsnext: true, skip: ['yargs']})),
+    commonjs()
   ]
 }).then(function(bundle) {
   return bundle.write({

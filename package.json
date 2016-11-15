@@ -78,6 +78,7 @@
   "devDependencies": {
     "eslint": "2",
     "rollup": "0.34",
+    "rollup-plugin-commonjs": "^5.0.5",
     "rollup-plugin-node-resolve": "1",
     "tape": "4",
     "tv4": "1",
